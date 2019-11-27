@@ -1,15 +1,13 @@
-#ifndef ROBOT_CONFIG_H
-#define ROBOT_CONFIG_H
-
 using namespace vex;
 
 extern brain Brain;
 
-// VEXcode devices - declare new devices here, set them up
-// in robot-config.cpp
+// VEXcode devices
 extern controller Controller1;
-extern motor ClawMotor;
-extern motor Tester1;
+extern motor frontLeft;
+extern motor frontRight;
+extern motor tray;
+extern motor arms;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
@@ -17,5 +15,3 @@ extern motor Tester1;
  * This should be called at the start of your int main function.
  */
 void  vexcodeInit( void );
-
-#endif

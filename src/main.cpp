@@ -9,6 +9,16 @@
 
 
 #include "vex.h"
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// frontLeft            motor         1               
+// frontRight           motor         2               
+// tray                 motor         3               
+// arms                 motor         4               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
 #include "Functions.h"
 
@@ -70,31 +80,39 @@ void autonomous(void)
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) { 
-  //add local user control variables here:
-  int power;
+  tray.setVelocity(50,percent);
+  tray.setStopping(hold);
 
-  //User control code here, inside the loop:
-  //remove existing demo code and replace with you own! Then remove this comment
+//setting the arm to be controlled by the joystick
+  int armPower = Controller1.Axis1.position(percent);
+  arms.setStopping(hold);
+
+
   while (1) {
-    power = Controller1.Axis1.position(percent)+Controller1.Axis2.position(percent);
-    ClawMotor.setVelocity(power, pct);
-    ClawMotor.spin(reverse);
-    Controller1.ButtonY.pressed(autonomous);
 
-    if (Controller1.ButtonA.pressing())
-    {
-      Tester1.spin(forward);
-    }
 
-    else if (Controller1.ButtonB.pressing())
-    {
-      Tester1.spin(reverse);
-    }
+  if (Controller1.ButtonA.pressing()){
+    tray.spin(forward);
+  }
+  else if (Controller1.ButtonB.pressing()){
+    tray.spin(reverse);
+  }
+  else{
+    tray.stop();
+  }
 
-    else
-    {
-      Tester1.stop();
-    }
+  //this is an attempt to get the tray to move with the arm to avoid entanglement.
+  //needs to be tested and developed further. the relative speed of the motors 
+  //probably needs to be coordinated
+if (armPower != 0){
+  arms.setVelocity(armPower,percent);
+tray.setVelocity(armPower,percent);
+tray.spin(forward);
+arms.spin(forward);
+}
+else{
+  arms.stop();
+}
 
     wait(20, msec); // Sleep the task for a short amount of time to
   }
