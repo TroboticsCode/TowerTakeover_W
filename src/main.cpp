@@ -13,11 +13,15 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
 // frontLeft            motor         1               
 // frontRight           motor         2               
 // tray                 motor         3               
 // arms                 motor         4               
+// backRight            motor         8               
+// backLeft             motor         9               
+// leftIntake           motor         15              
+// rightIntake          motor         16              
+// Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
 #include "Functions.h"
@@ -80,17 +84,34 @@ void autonomous(void)
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) { 
+int rightPower;
+int leftPower;
+
   tray.setVelocity(50,percent);
   tray.setStopping(hold);
-
+  leftIntake.setVelocity(100,percent);
+  rightIntake.setVelocity(100,percent);
+  leftIntake.setStopping(coast);
+  rightIntake.setStopping(coast);
 //setting the arm to be controlled by the joystick
   int armPower = Controller1.Axis1.position(percent);
   arms.setStopping(hold);
 
 
   while (1) {
+    //this is the drive command, it makes the wheels go
+    leftPower = (Controller1.Axis2.position(percent) + Controller1.Axis1.position(percent))/2;
+    rightPower = (Controller1.Axis2.position(percent) - Controller1.Axis1.position(percent))/2;
+    frontLeft.setVelocity(leftPower,pct);
+    backLeft.setVelocity(leftPower,pct);
+    frontRight.setVelocity(rightPower,pct);
+    backRight.setVelocity(rightPower,pct);
 
-
+    frontLeft.spin(forward);
+    backLeft.spin(forward);
+    frontRight.spin(forward);
+    backRight.spin(forward);
+  //this controlls the tray
   if (Controller1.ButtonA.pressing()){
     tray.spin(forward);
   }
@@ -100,11 +121,34 @@ void usercontrol(void) {
   else{
     tray.stop();
   }
+  //this controlls the intake rollers on the ends of the arms
+  if (Controller1.ButtonR1.pressing()){
+    leftIntake.spin(forward);
+    rightIntake.spin(forward);
+  }
+  else if (Controller1.ButtonR2.pressing()){
+    leftIntake.spin(reverse);
+    rightIntake.spin(reverse);
+  }
+  else{
+    leftIntake.stop();
+    rightIntake.stop();
+  }
+  //this controlls the arms
+  if (Controller1.ButtonL1.pressing()){
+    arms.spin(reverse);
+  }
+  else if (Controller1.ButtonL2.pressing()){
+    arms.spin(forward);
+  }
+  else{
+    arms.stop();
+  }
 
   //this is an attempt to get the tray to move with the arm to avoid entanglement.
   //needs to be tested and developed further. the relative speed of the motors 
   //probably needs to be coordinated
-if (armPower != 0){
+/*if (armPower != 0){
   arms.setVelocity(armPower,percent);
 tray.setVelocity(armPower,percent);
 tray.spin(forward);
@@ -113,6 +157,8 @@ arms.spin(forward);
 else{
   arms.stop();
 }
+*/
+
 
     wait(20, msec); // Sleep the task for a short amount of time to
   }
