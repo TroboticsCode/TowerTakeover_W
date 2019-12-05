@@ -13,14 +13,14 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// frontLeft            motor         1               
+// frontLeft            motor         11              
 // frontRight           motor         2               
-// tray                 motor         3               
-// arms                 motor         4               
-// backRight            motor         8               
-// backLeft             motor         9               
-// leftIntake           motor         15              
-// rightIntake          motor         16              
+// tray                 motor         19              
+// arms                 motor         3               
+// backRight            motor         6               
+// backLeft             motor         20              
+// leftIntake           motor         12              
+// rightIntake          motor         4               
 // Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
@@ -94,14 +94,14 @@ int leftPower;
   leftIntake.setStopping(coast);
   rightIntake.setStopping(coast);
 //setting the arm to be controlled by the joystick
-  int armPower = Controller1.Axis1.position(percent);
+  //int armPower = Controller1.Axis1.position(percent);
   arms.setStopping(hold);
 
 
   while (1) {
     //this is the drive command, it makes the wheels go
-    leftPower = (Controller1.Axis2.position(percent) + Controller1.Axis1.position(percent))/2;
-    rightPower = (Controller1.Axis2.position(percent) - Controller1.Axis1.position(percent))/2;
+    leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis4.position(percent))/2;
+    rightPower = (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent))/2;
     frontLeft.setVelocity(leftPower,pct);
     backLeft.setVelocity(leftPower,pct);
     frontRight.setVelocity(rightPower,pct);
