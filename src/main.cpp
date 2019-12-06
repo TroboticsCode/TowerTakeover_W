@@ -25,6 +25,8 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
 #include "Functions.h"
+//#include "Autons.cpp"
+//#include "DriveFunctions.cpp"
 
 using namespace vex;
 
@@ -48,7 +50,7 @@ void pre_auton(void)
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   
-  Controller1.ButtonR1.pressed(cycle_autons);
+  Controller1.ButtonRight.pressed(cycle_autons);
   Brain.Screen.pressed(cycle_autons);
   return;
 }
@@ -60,8 +62,8 @@ void autonomous(void)
     case NONE:
     break;
 
-    case AutonR:    
-      Auton1();
+    case onePoint:    
+      onePointBoth();
     break;
 
     case AutonB:
@@ -99,6 +101,11 @@ int leftPower;
 
 
   while (1) {
+
+double armAngle = arms.position(degrees);
+Brain.Screen.clearLine();
+Brain.Screen.print(armAngle);
+
     //this is the drive command, it makes the wheels go
     leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis4.position(percent))/2;
     rightPower = (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent))/2;

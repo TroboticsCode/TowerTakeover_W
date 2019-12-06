@@ -8,7 +8,7 @@
 #include <math.h>
 #include "DriveFunctions.h"
 
-void go(float inches,int speed){
+void move(float inches,int speed){
   //this defines how much it needs to move to go an inch
   float driveSpins = inches/(4 * M_PI);
   //this sets how fast the motors will go useing int speed
@@ -48,5 +48,16 @@ void turnLeft(float degrees, int speed){
   frontRight.spinFor(turnSpins,turns);
   backLeft.spinFor(turnSpins,turns);
   backRight.spinFor(turnSpins,turns);
-
   }
+/*
+  void moveArms(bool armUp)
+  {
+    if(armUp){
+      arms.setVelocity(100,percent);
+    }
+    else if(!armUp)
+    {
+      arms.setVelocity(100,percent);
+      arms.spinFor(
+    }
+  }*/

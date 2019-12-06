@@ -30,10 +30,10 @@ void cycle_autons(void)
 {
     if (state == 0)
     {
-        state = AutonR;
-        strcpy(state_name, "Auton_1");
+        state = onePoint;
+        strcpy(state_name, "One Point");
     }
-    else if (state == AutonR)
+    else if (state == onePoint)
     {
          state =   AutonB;
          strcpy(state_name, "Auton_2");

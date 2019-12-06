@@ -9,6 +9,9 @@
 //lift, claw, etc
 //drive function prototypes can go here but they should be in the DriveFunctions.h file
 
-void driveFunction(void);
+
+void move(float inches,int speed);
+void turnRight(float degrees,int speed);
+void turnLeft(float degrees,int speed);
 
 #endif

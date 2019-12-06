@@ -9,7 +9,7 @@
 //number them sequentially and match them to the cases names
 //in autonomous() in main.cpp
 #define NONE 0
-#define AutonR 1
+#define onePoint 1
 #define AutonB 2
 
 extern int state;
@@ -19,6 +19,6 @@ void cycle_autons(void);
 void Paint_Screen(void);
 
 //list the names of your autonomous programs here
-void Auton1(void);
+void onePointBoth(void);
 
 #endif
