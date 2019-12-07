@@ -91,24 +91,27 @@ int leftPower;
 
   tray.setVelocity(50,percent);
   tray.setStopping(hold);
-  leftIntake.setVelocity(100,percent);
-  rightIntake.setVelocity(100,percent);
-  leftIntake.setStopping(coast);
-  rightIntake.setStopping(coast);
+  leftIntake.setStopping(hold);
+  rightIntake.setStopping(hold);
 //setting the arm to be controlled by the joystick
   //int armPower = Controller1.Axis1.position(percent);
   arms.setStopping(hold);
 
 
   while (1) {
-
+//this measures the arm motor angle and prints the value to the brain screen
 double armAngle = arms.position(degrees);
 Brain.Screen.clearLine();
 Brain.Screen.print(armAngle);
 
+//this command moves the arms to a set position that is correct to intake cubes
+if (Controller1.ButtonY.pressing()){
+arms.spinToPosition(90,degrees);
+}
+
     //this is the drive command, it makes the wheels go
-    leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis4.position(percent))/2;
-    rightPower = (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent))/2;
+    leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2;
+    rightPower = (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2;
     frontLeft.setVelocity(leftPower,pct);
     backLeft.setVelocity(leftPower,pct);
     frontRight.setVelocity(rightPower,pct);
@@ -130,10 +133,14 @@ Brain.Screen.print(armAngle);
   }
   //this controlls the intake rollers on the ends of the arms
   if (Controller1.ButtonR1.pressing()){
+    leftIntake.setVelocity(100,percent);
+    rightIntake.setVelocity(100,percent);
     leftIntake.spin(forward);
     rightIntake.spin(forward);
   }
   else if (Controller1.ButtonR2.pressing()){
+    leftIntake.setVelocity(50,percent);
+    rightIntake.setVelocity(50,percent);
     leftIntake.spin(reverse);
     rightIntake.spin(reverse);
   }
@@ -143,14 +150,17 @@ Brain.Screen.print(armAngle);
   }
   //this controlls the arms
   if (Controller1.ButtonL1.pressing()){
-    arms.spin(reverse);
+    arms.spin(forward);
   }
   else if (Controller1.ButtonL2.pressing()){
-    arms.spin(forward);
+    arms.spin(reverse);
   }
   else{
     arms.stop();
   }
+    
+  
+  
 
   //this is an attempt to get the tray to move with the arm to avoid entanglement.
   //needs to be tested and developed further. the relative speed of the motors 
@@ -170,6 +180,7 @@ else{
     wait(20, msec); // Sleep the task for a short amount of time to
   }
 }
+
 
 
 // Main will set up the competition functions and callbacks.

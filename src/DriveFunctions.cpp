@@ -49,6 +49,60 @@ void turnLeft(float degrees, int speed){
   backLeft.spinFor(turnSpins,turns);
   backRight.spinFor(turnSpins,turns);
   }
+  void intakeDrive(float inches, int speed){
+    float driveSpins = inches/(4 * M_PI);
+    frontLeft.setVelocity(speed,percent);
+    frontRight.setVelocity(speed,percent);
+    backLeft.setVelocity(speed,percent);
+    backRight.setVelocity(speed,percent);
+    rightIntake.setVelocity(100,percent);
+    leftIntake.setVelocity(100,percent);
+    leftIntake.setStopping(hold);
+    rightIntake.setStopping(hold);
+    leftIntake.spin(forward);
+    rightIntake.spin(forward);
+    frontLeft.spinFor(driveSpins,turns,false);
+    frontRight.spinFor(driveSpins,turns,false);
+    backLeft.spinFor(driveSpins,turns,false);
+    backRight.spinFor(driveSpins,turns,true);
+    leftIntake.stop();
+    rightIntake.stop();
+  }
+  void runIntakeFwd(double miliseconds){
+    leftIntake.setVelocity(100,percent);
+    rightIntake.setVelocity(100,percent);
+    leftIntake.setStopping(hold);
+    rightIntake.setStopping(hold);
+    leftIntake.spin(forward);
+    rightIntake.spin(forward);
+    wait(miliseconds,msec);
+    rightIntake.stop();
+    leftIntake.stop();
+  }
+  void runIntakeRev(double miliseconds){
+    leftIntake.setVelocity(50,percent);
+    rightIntake.setVelocity(50,percent);
+    leftIntake.setStopping(hold);
+    rightIntake.setStopping(hold);
+    leftIntake.spin(reverse);
+    rightIntake.spin(reverse);
+    wait(miliseconds,msec);
+    rightIntake.stop();
+    leftIntake.stop();
+  }
+  void moveTrayFwd(){
+    tray.spinToPosition(100,degrees/*change later*/);
+  }
+  void moveTrayRev(){
+    tray.spinToPosition(0,degrees);
+  }
+
+  void score(){
+    runIntakeRev(1000);
+
+  }
+  
+  
 /*
   void moveArms(bool armUp)
   {
