@@ -5,12 +5,12 @@
 //Put your auton routines in here
 
 void onePointBoth(){
-  arms.spinToPosition(200,degrees);
+  move(-24,70);
   wait(1000,msec);
-  arms.spinToPosition(90,degrees);
-  move(24,100);
+  move(24,70);
+  arms.spinToPosition(400,degrees);
   wait(1000,msec);
-  move(-24,100);
+  arms.spinToPosition(0,degrees);
 }
 void Auton2(){
   arms.spinToPosition(200,degrees);
