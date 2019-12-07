@@ -80,8 +80,8 @@ void turnLeft(float degrees, int speed){
     leftIntake.stop();
   }
   void runIntakeRev(double miliseconds){
-    leftIntake.setVelocity(50,percent);
-    rightIntake.setVelocity(50,percent);
+    leftIntake.setVelocity(25,percent);
+    rightIntake.setVelocity(25,percent);
     leftIntake.setStopping(hold);
     rightIntake.setStopping(hold);
     leftIntake.spin(reverse);
@@ -99,6 +99,10 @@ void turnLeft(float degrees, int speed){
 
   void score(){
     runIntakeRev(1000);
+    moveTrayFwd();
+    leftIntake.spin(reverse);
+    rightIntake.spin(reverse);
+    move(-24,20);
 
   }
   
