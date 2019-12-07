@@ -108,6 +108,9 @@ Brain.Screen.print(armAngle);
 if (Controller1.ButtonY.pressing()){
 arms.spinToPosition(90,degrees);
 }
+if (Controller1.ButtonX.pressing()){
+  arms.setPosition(0,degrees);
+}
 
     //this is the drive command, it makes the wheels go
     leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2;
