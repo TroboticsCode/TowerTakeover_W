@@ -96,14 +96,20 @@ void turnLeft(float degrees, int speed){
   void moveTrayRev(){
     tray.spinToPosition(0,degrees);
   }
-
   void score(){
     runIntakeRev(1000);
     moveTrayFwd();
-    leftIntake.spin(reverse);
-    rightIntake.spin(reverse);
+    runIntakeRev(1000);
     move(-24,20);
-
+  }
+  void setUp(){
+  arms.spinToPosition(200,degrees);
+  wait(500,msec);
+  arms.spinToPosition(90,degrees);
+  }
+  void putInTheTower(){
+    runIntakeRev(500);
+    arms.spinToPosition(100,degrees); //number will be changed
   }
   
   

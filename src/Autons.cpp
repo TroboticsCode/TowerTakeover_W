@@ -13,14 +13,10 @@ void onePointBoth(){
   arms.spinToPosition(0,degrees);
 }
 void Auton2(){
-  arms.spinToPosition(200,degrees);
-  wait(1000,msec);
-  arms.spinToPosition(90,degrees);
+  setUp();
   intakeDrive(60,100);
   intakeDrive(-48,70);
   turnLeft(90,40);
   move(14,40);
-  runIntakeRev(1000);
-  
-
+  score();
 }

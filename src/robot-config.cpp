@@ -15,7 +15,7 @@ motor arms = motor(PORT3, ratio36_1, false);
 motor backRight = motor(PORT6, ratio18_1, true);
 motor backLeft = motor(PORT20, ratio18_1, false);
 motor leftIntake = motor(PORT12, ratio18_1, false);
-motor rightIntake = motor(PORT4, ratio18_1, true);
+motor rightIntake = motor(PORT5, ratio18_1, true);
 controller Controller1 = controller(primary);
 
 // VEXcode generated functions

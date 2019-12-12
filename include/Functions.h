@@ -16,6 +16,7 @@ void turnLeft(float degrees,int speed);
 void intakeDrive(float inches, int speed);
 void runIntakeFwd(double miliseconds);
 void runIntakeRev(double miliseconds);
-
+void score(void);
+void setUp(void);
 
 #endif

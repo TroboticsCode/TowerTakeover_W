@@ -20,7 +20,7 @@
 // backRight            motor         6               
 // backLeft             motor         20              
 // leftIntake           motor         12              
-// rightIntake          motor         4               
+// rightIntake          motor         5               
 // Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
