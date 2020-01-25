@@ -6,5 +6,5 @@
 
 void Auton1()
 {
-  Tester1.spinFor(2,turns);
+ 
 }

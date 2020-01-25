@@ -104,14 +104,19 @@ void usercontrol(void) {
   //this is an attempt to get the tray to move with the arm to avoid entanglement.
   //needs to be tested and developed further. the relative speed of the motors 
   //probably needs to be coordinated
-if (armPower != 0){
-  arms.setVelocity(armPower,percent);
-tray.setVelocity(armPower,percent);
-tray.spin(forward);
-arms.spin(forward);
+  double armAngle = arms.position(degrees);
+int SOMECONSTANT = 1; //need to figure out this constant
+if (arms.isSpinning() == true){
+if (armAngle > 300 && armAngle < 500){
+  
+    double trayAngle = armAngle*SOMECONSTANT;
+    tray.spinToPosition(trayAngle,degrees, false);
+  
 }
-else{
-  arms.stop();
+}
+else
+{
+  tray.stop();
 }
 
     wait(20, msec); // Sleep the task for a short amount of time to
