@@ -22,6 +22,7 @@
 // leftIntake           motor         12              
 // rightIntake          motor         5               
 // Controller1          controller                    
+// Pot                  pot           H               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
 #include "Functions.h"
@@ -86,10 +87,12 @@ void autonomous(void)
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) { 
+arms.setPosition(0,degrees);
+tray.setPosition(0,degrees);
 int rightPower;
 int leftPower;
 
-  tray.setVelocity(50,percent);
+  tray.setVelocity(25,percent);
   tray.setStopping(hold);
   leftIntake.setStopping(hold);
   rightIntake.setStopping(hold);
@@ -100,21 +103,29 @@ int leftPower;
 
   while (1) {
 //this measures the arm motor angle and prints the value to the brain screen
-double armAngle = arms.position(degrees);
+double armAngle = Pot.angle(degrees);
+double trayAngle = tray.position(degrees);
+Brain.Screen.setCursor(1,1);
 Brain.Screen.clearLine();
-Brain.Screen.print(armAngle);
+Brain.Screen.print("arm angle = %f", armAngle);
+Brain.Screen.newLine();
+Brain.Screen.clearLine();
+Brain.Screen.print("tray motor angle = %f", trayAngle);
+
 
 //this command moves the arms to a set position that is correct to intake cubes
+int driveSpeed = 2;
 if (Controller1.ButtonY.pressing()){
-arms.spinToPosition(90,degrees);
+  driveSpeed = 4;
 }
-if (Controller1.ButtonX.pressing()){
-  arms.setPosition(0,degrees);
+else if(Controller1.ButtonX.pressing()){
+  driveSpeed = 2;
 }
+else{}
 
     //this is the drive command, it makes the wheels go
-    leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2;
-    rightPower = (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2;
+    leftPower = (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/driveSpeed;
+    rightPower = (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/driveSpeed;
     frontLeft.setVelocity(leftPower,pct);
     backLeft.setVelocity(leftPower,pct);
     frontRight.setVelocity(rightPower,pct);
@@ -125,15 +136,32 @@ if (Controller1.ButtonX.pressing()){
     frontRight.spin(forward);
     backRight.spin(forward);
   //this controlls the tray
-  if (Controller1.ButtonA.pressing()){
-    tray.spin(forward);
-  }
-  else if (Controller1.ButtonB.pressing()){
-    tray.spin(reverse);
-  }
-  else{
-    tray.stop();
-  }
+
+
+if (Controller1.ButtonUp.pressing()){
+if (Controller1.ButtonA.pressing()){
+  tray.setVelocity(25,percent);
+  tray.spin(forward);
+}
+else if (Controller1.ButtonB.pressing()){
+  tray.setVelocity(25,percent);
+  tray.spin(reverse);
+}
+else{
+  tray.stop();
+}
+}
+
+if (armAngle >=80 && armAngle <=95 ){
+  double trayAngleTarget = (armAngle-12)+((armAngle-80)*6.5);
+  tray.setVelocity(45,percent);
+  tray.spinToPosition(trayAngleTarget,degrees);
+}
+else if (armAngle>95) { //this condition will set the tray to the proper maximum forward position
+  tray.setVelocity(45,percent);
+  tray.spinToPosition(180.5,degrees);
+}
+
   //this controlls the intake rollers on the ends of the arms
   if (Controller1.ButtonR1.pressing()){
     leftIntake.setVelocity(100,percent);
@@ -152,6 +180,7 @@ if (Controller1.ButtonX.pressing()){
     rightIntake.stop();
   }
   //this controlls the arms
+  arms.setVelocity(40,pct);
   if (Controller1.ButtonL1.pressing()){
     arms.spin(forward);
   }

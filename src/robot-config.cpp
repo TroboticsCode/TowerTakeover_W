@@ -17,10 +17,11 @@ motor backLeft = motor(PORT20, ratio18_1, false);
 motor leftIntake = motor(PORT12, ratio18_1, false);
 motor rightIntake = motor(PORT5, ratio18_1, true);
 controller Controller1 = controller(primary);
+pot Pot = pot(Brain.ThreeWirePort.H);
 
 // VEXcode generated functions
-
-
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
