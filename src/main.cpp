@@ -152,7 +152,7 @@ else{
 }
 }
 
-if (armAngle >=80 && armAngle <=95 ){
+if (armAngle >=83 && armAngle <=95 ){
   double trayAngleTarget = (armAngle-12)+((armAngle-80)*6.5);
   tray.setVelocity(45,percent);
   tray.spinToPosition(trayAngleTarget,degrees);
