@@ -23,6 +23,7 @@
 // rightIntake          motor         5               
 // Controller1          controller                    
 // Pot                  pot           H               
+// PotentiometerB       pot           B               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 #include "Autons.h"
 #include "Functions.h"
@@ -70,7 +71,7 @@ void autonomous(void)
     case AutonB:
   
     break;
-          
+          // justin likes ***
     // Default = NO autonomous
     default:
     break;
@@ -104,13 +105,14 @@ int leftPower;
   while (1) {
 //this measures the arm motor angle and prints the value to the brain screen
 double armAngle = Pot.angle(degrees);
-double trayAngle = tray.position(degrees);
+//double trayAngle = tray.position(degrees);
+double trayAngle = PotentiometerB.angle(degrees);
 Brain.Screen.setCursor(1,1);
 Brain.Screen.clearLine();
 Brain.Screen.print("arm angle = %f", armAngle);
 Brain.Screen.newLine();
 Brain.Screen.clearLine();
-Brain.Screen.print("tray motor angle = %f", trayAngle);
+Brain.Screen.print("tray angle = %f", trayAngle);
 
 
 //this command moves the arms to a set position that is correct to intake cubes

@@ -13,6 +13,7 @@ extern motor leftIntake;
 extern motor rightIntake;
 extern controller Controller1;
 extern pot Pot;
+extern pot PotentiometerB;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
