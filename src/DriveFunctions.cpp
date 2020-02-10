@@ -5,7 +5,7 @@
 /*   help get your robot moving fast! */
 /*   Its a work in progress!          */
 /**************************************/
-#include <math.h>
+#include <vex.h>
 #include "DriveFunctions.h"
 
 void move(float inches,int speed){
@@ -103,9 +103,11 @@ void turnLeft(float degrees, int speed){
     move(-24,20);
   }
   void setUp(){
-  arms.spinToPosition(200,degrees);
-  wait(500,msec);
-  arms.spinToPosition(90,degrees);
+    runIntakeRev(1000);
+    tray.spinToPosition(62,degrees);
+    arms.spinToPosition(110,degrees);
+    tray.spinToPosition(44,degrees);
+    tray.setPosition(0,degrees);
   }
   void putInTheTower(){
     runIntakeRev(500);

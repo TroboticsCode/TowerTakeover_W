@@ -59,7 +59,8 @@ void pre_auton(void)
 
 void autonomous(void) 
 {
- switch (state)
+setUp();
+ /*switch (state)
   {
     case NONE:
     break;
@@ -71,11 +72,10 @@ void autonomous(void)
     case AutonB:
   
     break;
-          // justin likes ***
     // Default = NO autonomous
     default:
     break;
-  }
+  }*/
 }
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -94,25 +94,35 @@ int rightPower;
 int leftPower;
 
   tray.setVelocity(25,percent);
-  tray.setStopping(hold);
+  tray.setStopping(coast);
   leftIntake.setStopping(hold);
   rightIntake.setStopping(hold);
 //setting the arm to be controlled by the joystick
   //int armPower = Controller1.Axis1.position(percent);
-  arms.setStopping(hold);
+  arms.setStopping(coast);
 
 
   while (1) {
 //this measures the arm motor angle and prints the value to the brain screen
-double armAngle = Pot.angle(degrees);
+double armAnglePot = Pot.angle(degrees);
 //double trayAngle = tray.position(degrees);
-double trayAngle = PotentiometerB.angle(degrees);
+double trayAngle = tray.position(degrees);
+double armAngle = arms.position(degrees);
 Brain.Screen.setCursor(1,1);
 Brain.Screen.clearLine();
-Brain.Screen.print("arm angle = %f", armAngle);
+Brain.Screen.print("arm angle = %f", armAnglePot);
 Brain.Screen.newLine();
 Brain.Screen.clearLine();
-Brain.Screen.print("tray angle = %f", trayAngle);
+Brain.Screen.print("tray position = %f", trayAngle);
+Brain.Screen.newLine();
+Brain.Screen.clearLine();
+Brain.Screen.print("arm postition = %f", armAngle);
+/*Controller1.Screen.setCursor(2,1);
+Controller1.Screen.clearLine();
+Controller1.Screen.print("arm angle = %f", armAngle);
+Controller1.Screen.newLine();
+Controller1.Screen.clearLine();
+Controller1.Screen.print("tray angle = %f", trayAngle);*/
 
 
 //this command moves the arms to a set position that is correct to intake cubes
@@ -153,7 +163,7 @@ else{
   tray.stop();
 }
 }
-
+/*
 if (armAngle >=83 && armAngle <=95 ){
   double trayAngleTarget = (armAngle-12)+((armAngle-80)*6.5);
   tray.setVelocity(45,percent);
@@ -163,7 +173,7 @@ else if (armAngle>95) { //this condition will set the tray to the proper maximum
   tray.setVelocity(45,percent);
   tray.spinToPosition(180.5,degrees);
 }
-
+*/
   //this controlls the intake rollers on the ends of the arms
   if (Controller1.ButtonR1.pressing()){
     leftIntake.setVelocity(100,percent);
