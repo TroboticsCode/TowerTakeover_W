@@ -59,7 +59,7 @@ void pre_auton(void)
 
 void autonomous(void) 
 {
-setUp();
+  TEST();
  /*switch (state)
   {
     case NONE:
@@ -69,14 +69,44 @@ setUp();
       onePointBoth();
     break;
 
-    case AutonB:
-  
+    case SKILLS:
+      Auton2();
     break;
+
+    case fourPointB:
+      fourPointBlue();
+    break;
+
+    case fourPointR:
+      fourPointRed();
     // Default = NO autonomous
     default:
     break;
   }*/
 }
+
+// u r mr gay
+
+// ya im r u
+//Justin is a major Homosexual
+//like,major major homo
+//he just loves cock
+//give him ALL the cock
+//just, ALL of it
+//with Justin, the more cock the better
+//if Justin doesnt have a cock in his butt, he is UNCOMFORTABLE
+//just remeber, more cock is better
+//He likes sucking them too
+//He always remembers
+//"Spitters are quiters"
+//If you bust a nut in his MOUTH
+//he will swallow every bit of the CREAMY load just dumped in his mouth
+//every
+//last 
+//drop
+//
+//and he will like it
+
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*                              User Control Task                            */
@@ -88,19 +118,22 @@ setUp();
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) { 
+/*Controller1.Screen.clearScreen();
+Controller1.Screen.setCursor(1,1);
+Controller1.Screen.print("Justin loves cock");
+*/
 arms.setPosition(0,degrees);
 tray.setPosition(0,degrees);
 int rightPower;
 int leftPower;
 
   tray.setVelocity(25,percent);
-  tray.setStopping(coast);
+  tray.setStopping(hold);
   leftIntake.setStopping(hold);
   rightIntake.setStopping(hold);
 //setting the arm to be controlled by the joystick
   //int armPower = Controller1.Axis1.position(percent);
-  arms.setStopping(coast);
-
+  arms.setStopping(hold);
 
   while (1) {
 //this measures the arm motor angle and prints the value to the brain screen
@@ -150,21 +183,20 @@ else{}
   //this controlls the tray
 
 
-if (Controller1.ButtonUp.pressing()){
-if (Controller1.ButtonA.pressing()){
-  tray.setVelocity(25,percent);
-  tray.spin(forward);
+  if (Controller1.ButtonA.pressing()){
+    tray.setVelocity(25,percent);
+    tray.spin(forward);
 }
-else if (Controller1.ButtonB.pressing()){
-  tray.setVelocity(25,percent);
-  tray.spin(reverse);
+  else if (Controller1.ButtonB.pressing()){
+    tray.setVelocity(25,percent);
+    tray.spin(reverse);
 }
-else{
-  tray.stop();
+  else{
+    tray.stop();
 }
-}
-/*
-if (armAngle >=83 && armAngle <=95 ){
+
+
+/*if (armAngle >=83 && armAngle <=95 ){
   double trayAngleTarget = (armAngle-12)+((armAngle-80)*6.5);
   tray.setVelocity(45,percent);
   tray.spinToPosition(trayAngleTarget,degrees);
@@ -202,6 +234,7 @@ else if (armAngle>95) { //this condition will set the tray to the proper maximum
   else{
     arms.stop();
   }
+  Controller1.ButtonDown.pressed(setUp);
     
   
   
@@ -242,3 +275,31 @@ int main() {
     wait(100, msec);
   }
 }
+
+//Alex's Erotic Fanfiction
+//
+//Alex loves toes
+//Just all the toes
+//Male, Female, Human, Cow it doesnt matter
+//if its a toe, he will lick,suck,and slobber all over them
+//he doesnt care how dirty or clean
+//just give him the toes
+//If you get home from a nice sweaty workout
+//Alex is the best for getting right between the toes 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//

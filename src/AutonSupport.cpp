@@ -35,14 +35,22 @@ void cycle_autons(void)
     }
     else if (state == onePoint)
     {
-         state =   AutonB;
-         strcpy(state_name, "Auton_2");
+         state = SKILLS;
+         strcpy(state_name, "Skills");
     }
     
-    else if (state == AutonB)
+    else if (state == SKILLS)
     {
-        state = NONE;
-        strcpy(state_name, "NONE");
+        state = fourPointB;
+        strcpy(state_name, "4 Point Blue");
+    }
+    else if (state == fourPointB){
+      state = fourPointR;
+      strcpy(state_name,"4 Point Red");
+    }
+    else if (state == fourPointR){
+      state = NONE;
+      strcpy(state_name,"NONE");
     }
     Paint_Screen();
 }

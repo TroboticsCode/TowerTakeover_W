@@ -6,7 +6,9 @@
 /*   Its a work in progress!          */
 /**************************************/
 #include <vex.h>
-#include "DriveFunctions.h"
+#include "Functions.h"
+
+bool ranSetup = false;
 
 void move(float inches,int speed){
   //this defines how much it needs to move to go an inch
@@ -23,30 +25,30 @@ void move(float inches,int speed){
   backRight.spinFor(driveSpins,turns,true);
 }
 void turnRight(float degrees, int speed){
-  float turnSpins = degrees*360/70.243567;
+  float turnSpins = degrees/106;
 
   frontLeft.setVelocity(-speed,percent);
   frontRight.setVelocity(speed,percent);
   backLeft.setVelocity(-speed,percent);
   backRight.setVelocity(speed,percent);
 
-  frontLeft.spinFor(turnSpins,turns);
-  frontRight.spinFor(turnSpins,turns);
-  backLeft.spinFor(turnSpins,turns);
-  backRight.spinFor(turnSpins,turns);
+  frontLeft.spinFor(turnSpins,turns,false);
+  frontRight.spinFor(-turnSpins,turns,false);
+  backLeft.spinFor(turnSpins,turns,false);
+  backRight.spinFor(-turnSpins,turns);
 
   }
 void turnLeft(float degrees, int speed){
-  float turnSpins = degrees*360/70.243567; //expect to tune the denominator for accuracy with robot
+  float turnSpins = degrees/106; //expect to tune the denominator for accuracy with robot
 
   frontLeft.setVelocity(speed,percent);
-  frontRight.setVelocity(-speed,percent);
+  frontRight.setVelocity(speed,percent);
   backLeft.setVelocity(speed,percent);
-  backRight.setVelocity(-speed,percent);
+  backRight.setVelocity(speed,percent);
 
-  frontLeft.spinFor(turnSpins,turns);
-  frontRight.spinFor(turnSpins,turns);
-  backLeft.spinFor(turnSpins,turns);
+  frontLeft.spinFor(-turnSpins,turns, false);
+  frontRight.spinFor(turnSpins,turns, false);
+  backLeft.spinFor(-turnSpins,turns, false);
   backRight.spinFor(turnSpins,turns);
   }
   void intakeDrive(float inches, int speed){
@@ -57,6 +59,25 @@ void turnLeft(float degrees, int speed){
     backRight.setVelocity(speed,percent);
     rightIntake.setVelocity(100,percent);
     leftIntake.setVelocity(100,percent);
+    leftIntake.setStopping(hold);
+    rightIntake.setStopping(hold);
+    leftIntake.spin(forward);
+    rightIntake.spin(forward);
+    frontLeft.spinFor(driveSpins,turns,false);
+    frontRight.spinFor(driveSpins,turns,false);
+    backLeft.spinFor(driveSpins,turns,false);
+    backRight.spinFor(driveSpins,turns,true);
+    leftIntake.stop();
+    rightIntake.stop();
+  }
+  void intakeDriveRev(float inches, int speed){
+    float driveSpins = inches/(4 * M_PI);
+    frontLeft.setVelocity(speed,percent);
+    frontRight.setVelocity(speed,percent);
+    backLeft.setVelocity(speed,percent);
+    backRight.setVelocity(speed,percent);
+    rightIntake.setVelocity(25,percent);
+    leftIntake.setVelocity(25,percent);
     leftIntake.setStopping(hold);
     rightIntake.setStopping(hold);
     leftIntake.spin(forward);
@@ -91,27 +112,44 @@ void turnLeft(float degrees, int speed){
     leftIntake.stop();
   }
   void moveTrayFwd(){
-    tray.spinToPosition(100,degrees/*change later*/);
+    tray.setVelocity(25,percent);
+    tray.setStopping(hold);
+    tray.setTimeout(2500,msec);
+    tray.spinToPosition(382,degrees,true);
+    tray.stop();
   }
   void moveTrayRev(){
+    tray.setVelocity(25,percent);
     tray.spinToPosition(0,degrees);
   }
-  void score(){
-    runIntakeRev(1000);
+  void score(float backUp){
+    runIntakeRev(750);
     moveTrayFwd();
-    runIntakeRev(1000);
-    move(-24,20);
+    intakeDriveRev(-backUp,40);
+    moveTrayRev();
   }
-  void setUp(){
-    runIntakeRev(1000);
-    tray.spinToPosition(62,degrees);
-    arms.spinToPosition(110,degrees);
+  void setUp(void){
+    //if(ranSetup == false){runIntakeRev(1500);
+    tray.setPosition(0,degrees);
+    arms.setPosition(0,degrees);
+    runIntakeRev(750);
+    tray.spinToPosition(62,degrees,false);
+    wait(500,msec);
+    arms.spinToPosition(140,degrees);
     tray.spinToPosition(44,degrees);
     tray.setPosition(0,degrees);
-  }
-  void putInTheTower(){
-    runIntakeRev(500);
-    arms.spinToPosition(100,degrees); //number will be changed
+    arms.spinToPosition(0,degrees);
+    //ranSetup = true;
+    }
+  void towerSm(){
+    runIntakeRev(800);
+    tray.spinToPosition(109,degrees);
+    arms.spinToPosition(340,degrees);
+    arms.setStopping(hold);
+    arms.stop();
+    move(10,30);
+    wait(500,msec);
+    runIntakeRev(1000);
   }
   
   

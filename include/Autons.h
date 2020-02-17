@@ -10,7 +10,9 @@
 //in autonomous() in main.cpp
 #define NONE 0
 #define onePoint 1
-#define AutonB 2
+#define SKILLS 2
+#define fourPointB 3
+#define fourPointR 4
 
 extern int state;
 
@@ -20,6 +22,9 @@ void Paint_Screen(void);
 
 //list the names of your autonomous programs here
 void onePointBoth(void);
-void auton2(void);
+void Auton2(void);
+void fourPointBlue(void);
+void fourPointRed(void);
+void TEST(void);
 
 #endif

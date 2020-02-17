@@ -14,9 +14,16 @@ void move(float inches,int speed);
 void turnRight(float degrees,int speed);
 void turnLeft(float degrees,int speed);
 void intakeDrive(float inches, int speed);
+
 void runIntakeFwd(double miliseconds);
 void runIntakeRev(double miliseconds);
-void score(void);
+
+void moveTrayFwd(void);
+void moveTrayRev(void);
+
+void towerSm(void);
+
+void score(float backUp);
 void setUp(void);
 
 #endif
