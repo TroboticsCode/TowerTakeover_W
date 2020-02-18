@@ -53,18 +53,29 @@ void fourPointRed(){
 }
 void TEST(){
   //setUp();
-  intakeDrive(40,30);
+  intakeDrive(36,30);
   runIntakeFwd(500);
-  move(-38,50);
+  intakeDrive(-6,50);
+  move(-28,50);
   move(-4,30);
   wait(500,msec);
   move(20,50);
   turnLeft(135,40);
   move(21,40);
   score(23);
-  turnRight(135,50);
-  intakeDrive(28,40);
+  turnRight(133,30);
+  intakeDrive(20,40);
   runIntakeFwd(1000);
-  intakeDrive(-12,50);
+  intakeDrive(-8,25);
   towerSm();
+  move(-14,40);
+  turnRight(90,30);
+  move(-24,40);
+  move(-8,30);
+  wait(500,msec);
+  move(46,40);
+  intakeDrive(12,30);
+  runIntakeFwd(1000);
+  intakeDrive(-8,25);
+  towerMd();
 }

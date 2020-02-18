@@ -147,11 +147,26 @@ void turnLeft(float degrees, int speed){
     arms.spinToPosition(340,degrees);
     arms.setStopping(hold);
     arms.stop();
-    move(10,30);
+    move(12,30);
     wait(500,msec);
     runIntakeRev(1000);
+    move(-12,30);
+    arms.spinToPosition(0,degrees);
+    tray.spinToPosition(0,degrees);
   }
-  
+  void towerMd(){
+    runIntakeRev(800);
+    tray.spinToPosition(109,degrees);
+    arms.spinToPosition(422.6,degrees);
+    arms.setStopping(hold);
+    arms.stop();
+    move(12,30);
+    wait(500,msec);
+    runIntakeRev(1000);
+    move(-12,30);
+    arms.spinToPosition(0,degrees);
+    tray.spinToPosition(0,degrees);
+  }
   
 /*
   void moveArms(bool armUp)

@@ -22,6 +22,7 @@ void moveTrayFwd(void);
 void moveTrayRev(void);
 
 void towerSm(void);
+void towerMd(void);
 
 void score(float backUp);
 void setUp(void);
