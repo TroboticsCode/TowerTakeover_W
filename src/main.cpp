@@ -118,10 +118,14 @@ void autonomous(void)
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) { 
-/*Controller1.Screen.clearScreen();
+Controller1.Screen.clearScreen();
 Controller1.Screen.setCursor(1,1);
-Controller1.Screen.print("Justin loves cock");
-*/
+Controller1.Screen.print("Dumb");
+Controller1.Screen.newLine();
+Controller1.Screen.print("Poopy");
+Controller1.Screen.newLine();
+Controller1.Screen.print("Stinky");
+
 arms.setPosition(0,degrees);
 tray.setPosition(0,degrees);
 int rightPower;

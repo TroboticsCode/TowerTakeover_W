@@ -147,7 +147,7 @@ void turnLeft(float degrees, int speed){
     arms.spinToPosition(340,degrees);
     arms.setStopping(hold);
     arms.stop();
-    move(12,30);
+    move(11,30);
     wait(500,msec);
     runIntakeRev(1000);
     move(-12,30);

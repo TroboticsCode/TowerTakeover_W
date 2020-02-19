@@ -63,19 +63,19 @@ void TEST(){
   turnLeft(135,40);
   move(21,40);
   score(23);
-  turnRight(133,30);
+  turnRight(131,30);
   intakeDrive(20,40);
   runIntakeFwd(1000);
   intakeDrive(-8,25);
   towerSm();
-  move(-14,40);
+  move(-16,40);
   turnRight(90,30);
   move(-24,40);
   move(-8,30);
   wait(500,msec);
-  move(46,40);
+  move(38,40);
   intakeDrive(12,30);
-  runIntakeFwd(1000);
+  runIntakeFwd(500);
   intakeDrive(-8,25);
   towerMd();
 }
