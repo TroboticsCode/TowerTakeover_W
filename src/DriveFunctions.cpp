@@ -51,6 +51,16 @@ void turnLeft(float degrees, int speed){
   backLeft.spinFor(-turnSpins,turns, false);
   backRight.spinFor(turnSpins,turns);
   }
+  void stopB(){
+    frontLeft.setStopping(brake);
+    frontRight.setStopping(brake);
+    backLeft.setStopping(brake);
+    backRight.setStopping(brake);
+    frontLeft.stop();
+    frontRight.stop();
+    backLeft.stop();
+    backRight.stop();
+  }
   void intakeDrive(float inches, int speed){
     float driveSpins = inches/(4 * M_PI);
     frontLeft.setVelocity(speed,percent);
@@ -126,6 +136,7 @@ void turnLeft(float degrees, int speed){
     runIntakeRev(750);
     moveTrayFwd();
     intakeDriveRev(-backUp,40);
+    stopB();
     moveTrayRev();
   }
   void setUp(void){
@@ -147,9 +158,9 @@ void turnLeft(float degrees, int speed){
     arms.spinToPosition(340,degrees);
     arms.setStopping(hold);
     arms.stop();
-    move(11,30);
+    move(9,30);
     wait(500,msec);
-    runIntakeRev(1000);
+    runIntakeRev(1500);
     move(-12,30);
     arms.spinToPosition(0,degrees);
     tray.spinToPosition(0,degrees);
@@ -162,8 +173,8 @@ void turnLeft(float degrees, int speed){
     arms.stop();
     move(12,30);
     wait(500,msec);
-    runIntakeRev(1000);
-    move(-12,30);
+    runIntakeRev(1500);
+    move(-14,30);
     arms.spinToPosition(0,degrees);
     tray.spinToPosition(0,degrees);
   }
